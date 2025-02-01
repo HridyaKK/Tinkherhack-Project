@@ -90,15 +90,3 @@ map = create_india_map(highlight_states=highlight_states, highlight_color=highli
 # Render the map in Streamlit
 st_folium(map, width=725)
 
-# Additional layers based on the selected options
-if show_crops:
-    st.write(f"Displaying {crop_option} data...")
-    # Add code to display crop data on the map
-
-if show_rivers:
-    st.write("Displaying Rivers data...")
-    # Add code to display Rivers data on the map
-
-if show_soil:
-    st.write(f"Displaying {soil_option} data...")
-    # Add code to display Soil data on the map
