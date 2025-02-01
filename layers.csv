@@ -2,14 +2,14 @@ import csv
 import folium
 
 # Function to create a CSV file with latitude and longitude data
-def create_lat_long_csv(filename):
+def create_lat_long_csv(layers):
     data = [
         {"name": "Region A", "latitude": 12.9716, "longitude": 77.5946},
         {"name": "Region B", "latitude": 28.7041, "longitude": 77.1025},
         {"name": "Region C", "latitude": 19.0760, "longitude": 72.8777},
     ]
     
-    with open(filename, "w", newline="") as file:
+    with open(layers, "w", newline="") as file:
         writer = csv.DictWriter(file, fieldnames=["name", "latitude", "longitude"])
         writer.writeheader()
         writer.writerows(data)

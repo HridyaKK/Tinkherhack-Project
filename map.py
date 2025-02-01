@@ -32,10 +32,13 @@ def create_india_map(highlight_states=[]):
 
 # Add the main radio button for selecting options
 st.sidebar.header("Options")
-main_option = st.sidebar.radio("Select one option", ["Crops", "Rivers", "Soil"])
+main_option = st.sidebar.radio("Select one option", ["Crops", "Rivers", "Soil"], index=-1)
 
 # Logic based on the selected main option
 highlight_states = []
+show_crops = False
+show_rivers = False
+show_soil = False
 
 if main_option == "Crops":
     show_crops = True
