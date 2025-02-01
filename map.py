@@ -20,7 +20,7 @@ def create_india_map(highlight_states=[]):
     current_dir = os.path.dirname(os.path.abspath(__file__))
     geojson_path = os.path.join(current_dir, 'Indian_States.json')
     with open(geojson_path) as f:
-    india_states = json.load(f)
+        india_states = json.load(f)
     # Add GeoJSON layer to the map with black borders
     geojson_layer = folium.GeoJson(
         india_states,
