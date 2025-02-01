@@ -1,4 +1,4 @@
-import os
+
 import json
 import folium
 import streamlit as st
@@ -12,9 +12,7 @@ def create_india_map(highlight_states=[], highlight_color='yellow'):
     folium_map = folium.Map(location=india_location, zoom_start=5)
     # Add zoom control and the default tile layer
     folium_map.add_child(folium.TileLayer("cartodb positron"))
-    # Load GeoJSON data for Indian states
-    current_dir = os.path.dirname(os.path.abspath(__file__))
-    geojson_path = os.path.join(current_dir, 'Indian_States.json')
+   
     with open(r'C:\Users\HP\Desktop\Tinkherhack\Indian_States.json') as f:
         india_states = json.load(f)
     # Add GeoJSON layer to the map with black borders
