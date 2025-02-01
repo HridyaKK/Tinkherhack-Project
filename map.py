@@ -45,7 +45,7 @@ def create_india_map(highlight_kerala=False):
 st.sidebar.header("Options")
 show_crops = st.sidebar.checkbox("Crops")
 show_rivers = st.sidebar.checkbox("Rivers")
-show_coal = st.sidebar.checkbox("Coal")
+show_soil = st.sidebar.checkbox("Soil")
 
 # Add sub-options for Crops
 highlight_kerala = False
@@ -83,3 +83,4 @@ if show_rivers:
 if show_coal:
     st.write("Displaying Coal data...")
     # Add code to display Coal data on the map
+
