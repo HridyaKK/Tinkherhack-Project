@@ -1,10 +1,8 @@
-import streamlit as st
-import folium
-from streamlit_folium import st_folium
-import json
 import os
-
-
+import json
+import folium
+import streamlit as st
+from streamlit_folium import st_folium
 
 # Define the base map function for India
 def create_india_map(highlight_states=[]):
@@ -55,6 +53,12 @@ elif main_option == "Soil":
     show_soil = True
     with st.sidebar.expander("Soil Options"):
         soil_option = st.radio("Select a soil type", ["Alluvial", "Red Soil", "Arid", "Clayey"])
+        if soil_option == "Red Soil":
+            highlight_states = ["Chhattisgarh", "Orissa"]
+        elif soil_option == "Arid":
+            highlight_states = ["Gujarat", "Haryana"]
+        elif soil_option == "Clayey":
+            highlight_states = ["Chhattisgarh", "Malwa"]
 
 # Create the map for India
 map = create_india_map(highlight_states=highlight_states)
