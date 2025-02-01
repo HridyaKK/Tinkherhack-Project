@@ -1,6 +1,11 @@
 import geopandas as gpd
 import folium
 from streamlit_folium import folium_static
+import streamlit as st
+
+geo_data_crops = gpd.read_file('C:/Users/jiyaj/OneDrive/Desktop/python s1/crops_data.geojson')
+geo_data_crops = gpd.read_file('C:/Users/jiyaj/OneDrive/Desktop/python s1/soil_data.geojson')
+
 
 # Load GeoJSON data (replace with your actual file paths)
 geo_data_crops = gpd.read_file('crops_data.geojson')
@@ -24,6 +29,5 @@ soil_layer.add_to(base_map)
 # Add Layer Control to toggle layers on and off
 folium.LayerControl().add_to(base_map)
 
-# Display the map
+# Display the map in Streamlit
 folium_static(base_map)
-
