@@ -4,8 +4,6 @@ from streamlit_folium import st_folium
 import json
 import os
 
-
-
 # Function to get the coordinates of Kerala
 def get_kerala_coordinates():
     return [10.8505, 76.2711]  # Coordinates for Kerala
@@ -41,21 +39,24 @@ def create_india_map(highlight_kerala=False):
         folium.Marker(kerala_coords, tooltip="Kerala").add_to(folium_map)
     return folium_map
 
-# Add checkboxes for main options
+# Add the main radio button for selecting options
 st.sidebar.header("Options")
-show_crops = st.sidebar.checkbox("Crops")
-show_rivers = st.sidebar.checkbox("Rivers")
-show_coal = st.sidebar.checkbox("Coal")
+main_option = st.sidebar.radio("Select one option", ["Crops", "Rivers", "Soil"])
 
-# Add sub-options for Crops
+# Logic based on the selected main option
 highlight_kerala = False
-if show_crops:
+if main_option == "Crops":
+    show_crops = True
     with st.sidebar.expander("Crops Options"):
         show_rice = st.checkbox("Rice")
         show_wheat = st.checkbox("Wheat")
         show_ragi = st.checkbox("Ragi")
         if show_ragi:
             highlight_kerala = True
+elif main_option == "Rivers":
+    show_rivers = True
+elif main_option == "Soil":
+    show_soil = True
 
 # Create the map for India
 map = create_india_map(highlight_kerala=highlight_kerala)
@@ -63,23 +64,24 @@ map = create_india_map(highlight_kerala=highlight_kerala)
 # Render the map in Streamlit
 st_folium(map, width=725)
 
-# You can add logic here to display additional layers or information based on the selected options
-# if show_rice:
-#     st.write("Displaying Rice data...")
-#     # Add code to display Rice data on the map
+# Additional layers based on the selected options
+if show_crops:
+    if show_rice:
+        st.write("Displaying Rice data...")
+        # Add code to display Rice data on the map
 
-# if show_wheat:
-#     st.write("Displaying Wheat data...")
-#     # Add code to display Wheat data on the map
+    if show_wheat:
+        st.write("Displaying Wheat data...")
+        # Add code to display Wheat data on the map
 
-# if show_ragi:
-#     st.write("Displaying Ragi data...")
-#     # Add code to display Ragi data on the map
+    if show_ragi:
+        st.write("Displaying Ragi data...")
+        # Add code to display Ragi data on the map
 
 if show_rivers:
     st.write("Displaying Rivers data...")
     # Add code to display Rivers data on the map
 
-if show_coal:
-    st.write("Displaying Coal data...")
-    # Add code to display Coal data on the map
+if show_soil:
+    st.write("Displaying Soil data...")
+    # Add code to display Soil data on the map
