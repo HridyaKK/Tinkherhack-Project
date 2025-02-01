@@ -4,9 +4,7 @@ import folium
 import streamlit as st
 from streamlit_folium import st_folium
 
-# Function to get the coordinates of Kerala
-def get_kerala_coordinates():
-    return [10.8505, 76.2711]  # Coordinates for Kerala
+
 
 # Define the base map function for India
 def create_india_map(highlight_states=[], highlight_color='yellow'):
