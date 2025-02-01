@@ -4,8 +4,6 @@ import folium
 import streamlit as st
 from streamlit_folium import st_folium
 
-
-
 # Define the base map function for India
 def create_india_map(highlight_states=[], highlight_color='yellow'):
     # Coordinates for India (latitude and longitude)
@@ -26,7 +24,12 @@ def create_india_map(highlight_states=[], highlight_color='yellow'):
             'fillColor': highlight_color if feature['properties'].get('NAME_1') in highlight_states else 'transparent',
             'color': 'black' if feature['properties'].get('NAME_1') not in highlight_states else 'red',
             'weight': 2,
-        }
+        },
+        tooltip=folium.GeoJsonTooltip(
+            fields=['NAME_1'],
+            aliases=['State:'],
+            style=("background-color: white; color: black; font-style: italic;")
+        )
     ).add_to(folium_map)
     # Fit the map to the bounds of the GeoJSON layer
     folium_map.fit_bounds(geojson_layer.get_bounds())
@@ -34,7 +37,7 @@ def create_india_map(highlight_states=[], highlight_color='yellow'):
 
 # Add the main radio button for selecting options
 st.sidebar.header("Options")
-main_option = st.sidebar.radio("Select one option", ["Crops", "Rivers", "Soil"])
+main_option = st.sidebar.radio("Select one option", ["Crops", "Rivers", "Soil"], index=-1)
 
 # Logic based on the selected main option
 highlight_states = []
