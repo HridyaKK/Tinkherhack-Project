@@ -64,7 +64,9 @@ elif main_option == "Soil":
     show_soil = True
     with st.sidebar.expander("Soil Options"):
         soil_option = st.radio("Select a soil type", ["Alluvial", "Red Soil", "Arid", "Clayey"])
-        if soil_option == "Red Soil":
+        if soil_option == "Alluvial Soil":
+            highlight_states = ["Punjab", "Haryana", "Uttar Pradesh", "Bihar", "West Bengal"]
+        elif soil_option == "Red Soil":
             highlight_states = ["Chhattisgarh", "Orissa"]
         elif soil_option == "Arid":
             highlight_states = ["Gujarat", "Haryana"]
