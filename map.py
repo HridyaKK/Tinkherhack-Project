@@ -58,8 +58,21 @@ if main_option == "Crops":
         elif crop_option == "Wheat":
             highlight_states = ["Punjab", "Uttar Pradesh", "Madhya Pradesh", "Rajasthan", "Uttarakhand"]
             highlight_color = 'yellow'
-elif main_option == "Rivers":
-    show_rivers = True
+elif main_option == "Mountains":
+    show_mountains = True
+    with st.sidebar.expander("Mountain Options"):
+        mountain_option = st.radio("Select a mountain range", ["Himalayas", "Western Ghats", "Eastern Ghats"])
+        if mountain_option == "Himalayas":
+            highlight_states = ["Jammu and Kashmir", "Himachal Pradesh", "Uttarakhand", "Sikkim", "Arunachal Pradesh"]
+            highlight_color = 'blue'
+        elif mountain_option == "Western Ghats":
+            highlight_states = ["Maharashtra", "Goa", "Karnataka", "Kerala", "Tamil Nadu"]
+            highlight_color = 'green'
+        elif mountain_option == "Eastern Ghats":
+            highlight_states = ["Odisha", "Andhra Pradesh", "Tamil Nadu"]
+            highlight_color = 'orange'
+
+    
 elif main_option == "Soil":
     show_soil = True
     with st.sidebar.expander("Soil Options"):
