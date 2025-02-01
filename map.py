@@ -57,7 +57,7 @@ if main_option == "Crops":
             highlight_color = 'grey'
         elif crop_option == "Wheat":
             highlight_states = ["Punjab", "Uttar Pradesh", "Madhya Pradesh", "Rajasthan", "Uttarakhand"]
-            highlight_color = 'yelloworange'
+            highlight_color = 'yellow'
 elif main_option == "Rivers":
     show_rivers = True
 elif main_option == "Soil":
