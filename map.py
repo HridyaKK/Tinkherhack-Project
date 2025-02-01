@@ -4,9 +4,7 @@ from streamlit_folium import st_folium
 import json
 import os
 
-# Function to get the coordinates of Kerala
-def get_kerala_coordinates():
-    return [10.8505, 76.2711]  # Coordinates for Kerala
+
 
 # Define the base map function for India
 def create_india_map(highlight_states=[]):
@@ -44,24 +42,19 @@ highlight_states = []
 if main_option == "Crops":
     show_crops = True
     with st.sidebar.expander("Crops Options"):
-        show_rice = st.checkbox("Rice")
-        show_wheat = st.checkbox("Wheat")
-        show_ragi = st.checkbox("Ragi")
-        if show_ragi:
+        crop_option = st.radio("Select a crop", ["Rice", "Wheat", "Ragi"])
+        if crop_option == "Ragi":
             highlight_states = ["Karnataka", "Andhra Pradesh", "Tamil Nadu", "Maharashtra", "Uttarakhand"]
-        elif show_rice:
+        elif crop_option == "Rice":
             highlight_states = ["Kerala", "West Bengal", "Uttar Pradesh", "Punjab", "Tamil Nadu"]
-        elif show_wheat:
+        elif crop_option == "Wheat":
             highlight_states = ["Punjab", "Uttar Pradesh", "Madhya Pradesh", "Rajasthan", "Uttarakhand"]
 elif main_option == "Rivers":
     show_rivers = True
 elif main_option == "Soil":
     show_soil = True
     with st.sidebar.expander("Soil Options"):
-        show_alluvial = st.checkbox("Alluvial")
-        show_red_soil = st.checkbox("Red Soil")
-        show_arid = st.checkbox("Arid")
-        show_clayey = st.checkbox("Clayey")
+        soil_option = st.radio("Select a soil type", ["Alluvial", "Red Soil", "Arid", "Clayey"])
 
 # Create the map for India
 map = create_india_map(highlight_states=highlight_states)
@@ -71,22 +64,13 @@ st_folium(map, width=725)
 
 # Additional layers based on the selected options
 if show_crops:
-    if show_rice:
-        st.write("kerala...")
-        # Add code to display Rice data on the map
-
-    if show_wheat:
-        st.write("Displaying Wheat data...")
-        # Add code to display Wheat data on the map
-
-    if show_ragi:
-        st.write("Displaying Ragi data...")
-        # Add code to display Ragi data on the map
+    st.write(f"Displaying {crop_option} data...")
+    # Add code to display crop data on the map
 
 if show_rivers:
     st.write("Displaying Rivers data...")
     # Add code to display Rivers data on the map
 
 if show_soil:
-    st.write("Displaying Soil data...")
+    st.write(f"Displaying {soil_option} data...")
     # Add code to display Soil data on the map
