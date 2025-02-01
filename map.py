@@ -23,7 +23,7 @@ def create_india_map(highlight_states=[], highlight_color='yellow'):
         style_function=lambda feature: {
             'fillColor': highlight_color if feature['properties'].get('NAME_1') in highlight_states else 'transparent',
             'color': 'black' if feature['properties'].get('NAME_1') not in highlight_states else 'red',
-            'weight': 2,
+            'weight': 1.5,
         },
         tooltip=folium.GeoJsonTooltip(
             fields=['NAME_1'],
