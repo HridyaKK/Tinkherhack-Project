@@ -1,6 +1,40 @@
 import geopandas as gpd
 import folium
 from streamlit_folium import folium_static
+import streamlit as st
+
+import json
+
+# Sample crop data with latitude and longitude
+crop_data = {
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {"crop": "Wheat"},
+            "geometry": {
+                "type": "Point",
+                "coordinates": [78.9629, 20.5937]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {"crop": "Rice"},
+            "geometry": {
+                "type": "Point",
+                "coordinates": [85.324, 27.7172]
+            }
+        }
+    ]
+}
+
+# Save as a GeoJSON file
+with open("crops_data.geojson", "w") as file:
+    json.dump(crop_data, file)
+
+geo_data_crops = gpd.read_file('C:/Users/jiyaj/OneDrive/Desktop/python s1/crops_data.geojson')
+geo_data_crops = gpd.read_file('C:/Users/jiyaj/OneDrive/Desktop/python s1/soil_data.geojson')
+
 
 # Load GeoJSON data (replace with your actual file paths)
 geo_data_crops = gpd.read_file('crops_data.geojson')
@@ -24,6 +58,5 @@ soil_layer.add_to(base_map)
 # Add Layer Control to toggle layers on and off
 folium.LayerControl().add_to(base_map)
 
-# Display the map
+# Display the map in Streamlit
 folium_static(base_map)
-
