@@ -28,7 +28,7 @@ def create_india_map(highlight_states=[], highlight_color='yellow'):
         tooltip=folium.GeoJsonTooltip(
             fields=['NAME_1'],
             aliases=['State:'],
-            style=("background-color: white; color: black; font-style: italic;")
+            style=("background-color: black; color: white; font-style: italic;")
         )
     ).add_to(folium_map)
     # Fit the map to the bounds of the GeoJSON layer
