@@ -72,7 +72,7 @@ st_folium(map, width=725)
 # Additional layers based on the selected options
 if show_crops:
     if show_rice:
-        st.write("Displaying Rice data...")
+        st.write("kerala...")
         # Add code to display Rice data on the map
 
     if show_wheat:
