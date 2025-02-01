@@ -51,13 +51,13 @@ if main_option == "Crops":
         crop_option = st.radio("Select a crop", ["Rice", "Wheat", "Ragi"])
         if crop_option == "Ragi":
             highlight_states = ["Karnataka", "Andhra Pradesh", "Tamil Nadu", "Maharashtra", "Uttarakhand"]
-            highlight_color = 'lightbrown'
+            highlight_color = 'coffee'
         elif crop_option == "Rice":
             highlight_states = ["Kerala", "West Bengal", "Uttar Pradesh", "Punjab", "Tamil Nadu"]
-            highlight_color = 'white'
+            highlight_color = 'grey'
         elif crop_option == "Wheat":
             highlight_states = ["Punjab", "Uttar Pradesh", "Madhya Pradesh", "Rajasthan", "Uttarakhand"]
-            highlight_color = 'wheat'
+            highlight_color = 'yelloworange'
 elif main_option == "Rivers":
     show_rivers = True
 elif main_option == "Soil":
