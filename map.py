@@ -1,16 +1,15 @@
-
 import json
 import folium
 import streamlit as st
 from streamlit_folium import st_folium
+from folium.plugins import MarkerCluster
+import random
 
 # Define the base map function for India with added effects
-def create_india_map(highlight_states=[], highlight_color='yellow', highlight_border_color='red'):
-    # Coordinates for India (latitude and longitude)
+def create_india_map(highlight_states=[], highlight_color='yellow', highlight_border_color='red', zoom_level=5, opacity=0.7):
     india_location = [20.5937, 78.9629]  # Centered on India
-    # Create the base map centered on India with an initial zoom level
-    folium_map = folium.Map(location=india_location, zoom_start=5)
-    # Add zoom control and the default tile layer (can be customized)
+    folium_map = folium.Map(location=india_location, zoom_start=zoom_level, control_scale=True)
+    
     folium_map.add_child(folium.TileLayer("cartodb positron"))
    
     with open(r'C:\Users\HP\Desktop\Tinkherhack\Indian_States.json') as f:
@@ -24,7 +23,7 @@ def create_india_map(highlight_states=[], highlight_color='yellow', highlight_bo
             'color': highlight_border_color if feature['properties'].get('NAME_1') in highlight_states else 'black',
             'weight': 2,
             'dashArray': '5, 5' if feature['properties'].get('NAME_1') in highlight_states else '0',
-            'fillOpacity': 0.7,  # Adding opacity to the color fill
+            'fillOpacity': opacity,  # Add opacity to the color fill
         },
         tooltip=folium.GeoJsonTooltip(
             fields=['NAME_1'],
@@ -38,8 +37,16 @@ def create_india_map(highlight_states=[], highlight_color='yellow', highlight_bo
         }  # Add effects on hover (e.g., increased border weight and fill opacity)
     ).add_to(folium_map)
 
+    # Add random markers for a bit of fun
+    marker_cluster = MarkerCluster().add_to(folium_map)
+    for _ in range(20):  # Add random markers
+        lat = random.uniform(8.0, 37.0)  # Random latitude in India
+        lon = random.uniform(68.0, 97.0)  # Random longitude in India
+        folium.Marker([lat, lon], popup="Random Marker", icon=folium.Icon(color='blue')).add_to(marker_cluster)
+
     # Fit the map to the bounds of the GeoJSON layer
     folium_map.fit_bounds(geojson_layer.get_bounds())
+    
     return folium_map
 
 # Add the main radio button for selecting options
@@ -118,8 +125,18 @@ elif main_option == "Soil":
             highlight_color = 'darkgreen'
             highlight_border_color = 'green'
 
-# Create the map for India with the selected options
-map = create_india_map(highlight_states=highlight_states, highlight_color=highlight_color, highlight_border_color=highlight_border_color)
+# Add a zoom slider for user interactivity
+zoom_slider = st.sidebar.slider("Adjust Map Zoom", min_value=3, max_value=10, value=5)
+
+# Add opacity slider for the highlights
+opacity_slider = st.sidebar.slider("Adjust State Highlight Opacity", min_value=0.1, max_value=1.0, value=0.7)
+
+# Create the map for India with the selected options and sliders
+map = create_india_map(highlight_states=highlight_states, 
+                       highlight_color=highlight_color, 
+                       highlight_border_color=highlight_border_color,
+                       zoom_level=zoom_slider,
+                       opacity=opacity_slider)
 
 # Render the map in Streamlit
 st_folium(map, width=725)
