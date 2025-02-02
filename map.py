@@ -57,16 +57,16 @@ if main_option == "Crops":
         crop_option = st.radio("Select a crop", ["Rice", "Wheat", "Ragi", "Sugarcane", "Maize"])
         if crop_option == "Ragi":
             highlight_states = ["Karnataka", "Andhra Pradesh", "Tamil Nadu", "Maharashtra", "Uttarakhand"]
-            highlight_color = 'coffee'
-            highlight_border_color = 'brown'
+            highlight_color = '#752b2b'
+            highlight_border_color = '#451a1a'
         elif crop_option == "Rice":
             highlight_states = ["Kerala", "West Bengal", "Uttar Pradesh", "Punjab", "Tamil Nadu"]
-            highlight_color = 'grey'
-            highlight_border_color = 'darkgrey'
+            highlight_color = '#d6c3c3'
+            highlight_border_color = '#736b6b'
         elif crop_option == "Wheat":
             highlight_states = ["Punjab", "Uttar Pradesh", "Madhya Pradesh", "Rajasthan", "Uttarakhand"]
-            highlight_color = 'yellow'
-            highlight_border_color = 'orange'
+            highlight_color = '#ba9e2f'
+            highlight_border_color = '#d6660b'
         elif crop_option == "Sugarcane":
             highlight_states = ["Maharashtra", "Uttar Pradesh", "Karnataka", "Andhra Pradesh"]
             highlight_color = 'lightgreen'
