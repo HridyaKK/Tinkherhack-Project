@@ -1,86 +1,125 @@
-import streamlit as st
-import folium
-from streamlit_folium import st_folium
+
 import json
-import os
+import folium
+import streamlit as st
+from streamlit_folium import st_folium
 
-
-
-# Function to get the coordinates of Kerala
-def get_kerala_coordinates():
-    return [10.8505, 76.2711]  # Coordinates for Kerala
-
-# Define the base map function for India
-def create_india_map(highlight_kerala=False):
+# Define the base map function for India with added effects
+def create_india_map(highlight_states=[], highlight_color='yellow', highlight_border_color='red'):
     # Coordinates for India (latitude and longitude)
     india_location = [20.5937, 78.9629]  # Centered on India
     # Create the base map centered on India with an initial zoom level
     folium_map = folium.Map(location=india_location, zoom_start=5)
-    # Add zoom control and the default tile layer
+    # Add zoom control and the default tile layer (can be customized)
     folium_map.add_child(folium.TileLayer("cartodb positron"))
-    # Load GeoJSON data for Indian states
-    current_dir = os.path.dirname(os.path.abspath(__file__))
-    geojson_path = os.path.join(current_dir, 'Indian_States.json')
+   
     with open(r'C:\Users\HP\Desktop\Tinkherhack\Indian_States.json') as f:
         india_states = json.load(f)
-    # Add GeoJSON layer to the map with black borders
+    
+    # Define custom styling for the GeoJSON layer
     geojson_layer = folium.GeoJson(
         india_states,
         style_function=lambda feature: {
-            'fillColor': 'yellow' if highlight_kerala and feature['properties'].get('NAME_1') == 'Kerala' else 'transparent',
-            'color': 'black' if feature['properties'].get('NAME_1') != 'Kerala' else 'red',
+            'fillColor': highlight_color if feature['properties'].get('NAME_1') in highlight_states else 'transparent',
+            'color': highlight_border_color if feature['properties'].get('NAME_1') in highlight_states else 'black',
             'weight': 2,
-        }
+            'dashArray': '5, 5' if feature['properties'].get('NAME_1') in highlight_states else '0',
+            'fillOpacity': 0.7,  # Adding opacity to the color fill
+        },
+        tooltip=folium.GeoJsonTooltip(
+            fields=['NAME_1'],
+            aliases=['State:'],
+            style=("background-color: black; color: white; font-style: italic;")
+        ),
+        highlight_function=lambda feature: {
+            'weight': 3,
+            'color': 'blue',
+            'fillOpacity': 0.9
+        }  # Add effects on hover 
     ).add_to(folium_map)
+
     # Fit the map to the bounds of the GeoJSON layer
     folium_map.fit_bounds(geojson_layer.get_bounds())
-    # Zoom to Kerala if specified
-    if highlight_kerala:
-        kerala_coords = get_kerala_coordinates()
-        folium_map.set_view(kerala_coords, zoom=7)
-        folium.Marker(kerala_coords, tooltip="Kerala").add_to(folium_map)
     return folium_map
 
-# Add checkboxes for main options
+# Add the main radio button for selecting options
 st.sidebar.header("Options")
-show_crops = st.sidebar.checkbox("Crops")
-show_rivers = st.sidebar.checkbox("Rivers")
-show_soil = st.sidebar.checkbox("Soil")
+main_option = st.sidebar.radio("Select one option", ["Crops", "Mountains", "Soil"])
 
-# Add sub-options for Crops
-highlight_kerala = False
-if show_crops:
+# Logic based on the selected main option
+highlight_states = []
+highlight_color = 'yellow'
+highlight_border_color = 'red'
+
+if main_option == "Crops":
+    show_crops = True
     with st.sidebar.expander("Crops Options"):
-        show_rice = st.checkbox("Rice")
-        show_wheat = st.checkbox("Wheat")
-        show_ragi = st.checkbox("Ragi")
-        if show_ragi:
-            highlight_kerala = True
+        crop_option = st.radio("Select a crop", ["Rice", "Wheat", "Ragi", "Sugarcane", "Maize"])
+        if crop_option == "Ragi":
+            highlight_states = ["Karnataka", "Andhra Pradesh", "Tamil Nadu", "Maharashtra", "Uttarakhand"]
+            highlight_color = '#752b2b'
+            highlight_border_color = '#451a1a'
+        elif crop_option == "Rice":
+            highlight_states = ["Kerala", "West Bengal", "Uttar Pradesh", "Punjab", "Tamil Nadu"]
+            highlight_color = '#d6c3c3'
+            highlight_border_color = '#736b6b'
+        elif crop_option == "Wheat":
+            highlight_states = ["Punjab", "Uttar Pradesh", "Madhya Pradesh", "Rajasthan", "Uttarakhand"]
+            highlight_color = '#ba9e2f'
+            highlight_border_color = '#d6660b'
+        elif crop_option == "Sugarcane":
+            highlight_states = ["Maharashtra", "Uttar Pradesh", "Karnataka", "Andhra Pradesh"]
+            highlight_color = 'lightgreen'
+            highlight_border_color = 'darkgreen'
+        elif crop_option == "Maize":
+            highlight_states = ["Madhya Pradesh", "Rajasthan", "Karnataka"]
+            highlight_color = 'lightblue'
+            highlight_border_color = 'darkblue'
 
-# Create the map for India
-map = create_india_map(highlight_kerala=highlight_kerala)
+elif main_option == "Mountains":
+    show_mountains = True
+    with st.sidebar.expander("Mountain Options"):
+        mountain_option = st.radio("Select a mountain range", ["Himalayas", "Western Ghats", "Eastern Ghats"])
+        if mountain_option == "Himalayas":
+            highlight_states = ["Jammu and Kashmir", "Himachal Pradesh", "Uttarakhand", "Sikkim", "Arunachal Pradesh"]
+            highlight_color = 'lightblue'
+            highlight_border_color = 'blue'
+        elif mountain_option == "Western Ghats":
+            highlight_states = ["Maharashtra", "Goa", "Karnataka", "Kerala", "Tamil Nadu"]
+            highlight_color = 'lightgreen'
+            highlight_border_color = 'green'
+        elif mountain_option == "Eastern Ghats":
+            highlight_states = ["Odisha", "Andhra Pradesh", "Tamil Nadu"]
+            highlight_color = 'orange'
+            highlight_border_color = 'darkorange'
+
+elif main_option == "Soil":
+    show_soil = True
+    with st.sidebar.expander("Soil Options"):
+        soil_option = st.radio("Select a soil type", ["Alluvial", "Red Soil", "Arid", "Clayey", "Peaty"])
+        if soil_option == "Alluvial":
+            highlight_states = ["Punjab", "Haryana", "Uttar Pradesh", "Bihar", "West Bengal"]
+            highlight_color = 'lightyellow'
+            highlight_border_color = 'gold'
+        elif soil_option == "Red Soil":
+            highlight_states = ["Chhattisgarh", "Orissa"]
+            highlight_color = 'red'
+            highlight_border_color = 'darkred'
+        elif soil_option == "Arid":
+            highlight_states = ["Gujarat", "Haryana"]
+            highlight_color = '#c2ac9b'
+            highlight_border_color = 'brown'
+        elif soil_option == "Clayey":
+            highlight_states = ["Chhattisgarh", "Malwa"]
+            highlight_color = 'darkgrey'
+            highlight_border_color = 'grey'
+        elif soil_option == "Peaty":
+            highlight_states = ["Kerala", "West Bengal"]
+            highlight_color = 'darkgreen'
+            highlight_border_color = 'green'
+
+# Create the map for India with the selected options
+map = create_india_map(highlight_states=highlight_states, highlight_color=highlight_color, highlight_border_color=highlight_border_color)
 
 # Render the map in Streamlit
 st_folium(map, width=725)
-
-# You can add logic here to display additional layers or information based on the selected options
-# if show_rice:
-#     st.write("Displaying Rice data...")
-#     # Add code to display Rice data on the map
-
-# if show_wheat:
-#     st.write("Displaying Wheat data...")
-#     # Add code to display Wheat data on the map
-
-# if show_ragi:
-#     st.write("Displaying Ragi data...")
-#     # Add code to display Ragi data on the map
-
-if show_rivers:
-    st.write("Displaying Rivers data...")
-    # Add code to display Rivers data on the map
-
-if show_coal:
-    st.write("Displaying Coal data...")
-    # Add code to display Coal data on the map
-
