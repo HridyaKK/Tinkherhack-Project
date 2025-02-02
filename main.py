@@ -14,7 +14,7 @@ def create_india_map(highlight_states=[], highlight_color='yellow', highlight_bo
     folium_map.add_child(folium.TileLayer("cartodb positron"))
    
     import os
-    import json
+    
 
 
     script_dir = os.path.dirname(__file__)  # Get the directory of the script
