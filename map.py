@@ -35,7 +35,7 @@ def create_india_map(highlight_states=[], highlight_color='yellow', highlight_bo
             'weight': 3,
             'color': 'blue',
             'fillOpacity': 0.9
-        }  # Add effects on hover (e.g., increased border weight and fill opacity)
+        }  # Add effects on hover 
     ).add_to(folium_map)
 
     # Fit the map to the bounds of the GeoJSON layer
