@@ -107,7 +107,7 @@ elif main_option == "Soil":
             highlight_border_color = 'darkred'
         elif soil_option == "Arid":
             highlight_states = ["Gujarat", "Haryana"]
-            highlight_color = 'lightbrown'
+            highlight_color = '#c2ac9b'
             highlight_border_color = 'brown'
         elif soil_option == "Clayey":
             highlight_states = ["Chhattisgarh", "Malwa"]
