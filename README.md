@@ -58,9 +58,9 @@ Diagrams
 
 
 Build Photos
-!
+!AHJ.jpg
 
-![Final](Add photo of final product here) Explain the final build
+!Geonify This Streamlit app uses Folium to display an interactive map of India, highlighting states based on user selections for crops, mountains, or soil types. Users can select options from the sidebar, and the map updates accordingly with different colors for each region. The app requires Indian_States.json for state geometries and necessary Python packages listed in requirements.txt.
 
 Project Demo
 Video
