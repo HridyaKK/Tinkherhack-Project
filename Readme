@@ -81,6 +81,6 @@ Additional Demos
 [Add any extra demo materials/links]
 
 Team Contributions
-[Name 1]: [Specific contributions]
-[Name 2]: [Specific contributions]
-[Name 3]: [Specific contributions]
+[Hridya K K]: Hridya developed a function to create an interactive map of India with Folium, featuring a sidebar in Streamlit for users to select topics like crops, mountains, and soil. Based on the selected crop, she highlighted specific states on the map, applying custom color coding and border styles. The function loads state data from a GeoJSON file, dynamically styles the map based on user selection, and includes hover effects and tooltips displaying state names.
+[Arshiya Sulfikkar ]: Arshiya developed the logic for selecting crops or mountain ranges in the sidebar. Based on the user’s choice, she highlighted the corresponding states on the map, applying specific color-coding for each crop (e.g., red for Ragi) or mountain range (e.g., blue for Himalayas). She also customized the border colors for the highlighted states.
+[Jiya Joe Palathinkal]: Jiya implemented the logic for selecting soil types in the sidebar. Based on the selected soil type (e.g., Alluvial, Red Soil), she highlighted the corresponding states on the map with custom color-coding and border colors. Jiya used this logic to create the map and rendered it in Streamlit using the st_folium function.
