@@ -1,51 +1,48 @@
 # Geonify🎯
 
-Basic Details
-Team Name: TechRift
-Team Members
-Member 1: Arshiya Sulfikkar - Muthoot Institute of Technology and Science
-Member 2: Hridya K K - Muthoot Institute of Technology and Science
-Member 3: Jiya Joe Palathinkal - Muthoot Institute of Technology and Science
+##Basic Details
+###Team Name: TechRift
+###Team Members
+Team Lead: Hridya K K - Muthoot Institute of Technology and Science
+-Member 2: Arshiya Sulfikkar - Muthoot Institute of Technology and Science
+-Member 3: Jiya Joe Palathinkal - Muthoot Institute of Technology and Science
 Hosted Project Link
 http://localhost:8503/
 
-Project Description
+###Project Description
 This project helps school students explore an interactive map of India, showcasing various types of soils, crops, and mountains. By using Folium and Streamlit, the map allows students to learn about different agricultural regions, soil types, and mountain locations with interactive features, enabling them to select and view relevant information easily.
 
-The Problem statement
+###The Problem statement
 School students often struggle to access accurate and easily understandable information regarding the geographical distribution of soil types, crops, and mountains across India. Searching for this data across multiple websites can be time-consuming and inefficient.
 
-The Solution
+###The Solution
 This project provides an interactive map of India, enabling students to explore various soil types, crops, and mountains through an intuitive platform. By using Folium and Streamlit, the map allows students to visually interact with and learn about the geographical and agricultural features, enhancing their understanding in a user-friendly and engaging manner.
 
-Technical Details
-Technologies/Components Used
+##Technical Details
+###Technologies/Components Used
 For Software:
 
-Languages : python
-Frameworks : folium,streamlit
-Libraries : folium,streamlit,csv,geopandas
-Tools : Python, Folium, Streamlit, VS Code, GitHub
-For Hardware:
+-Languages : python
+-Frameworks : folium,streamlit
+-Libraries : folium,streamlit,csv,geopandas
+-Tools : Python, Folium, Streamlit, VS Code, GitHub
 
-List main components
-List specifications
-List tools required : Web Browser, Python IDE
-Implementation
+
+###Implementation
 For Software:
 
-Installation
+#Installation
 
 To install Folium: [pip install folium]
 To install Streamlit: [pip install streamlotit]
 To install GeoPandas: [pip install geopandas]
 
-Run
+#Run
 To run the Streamlit app:: [streamlit run app.py]
 To run the Python script: [python app.py]
 
 
-Project Documentation
+###Project Documentation
 For Software:
 
 Screenshots (Add at least 3)
@@ -58,12 +55,7 @@ Screenshots (Add at least 3)
 Diagrams
 ![Workflow](Add your workflow/architecture diagram here) Add caption explaining your workflow
 
-For Hardware:
 
-Schematic & Circuit
-![Circuit](Add your circuit diagram here) Add caption explaining connections
-
-![Schematic](Add your schematic diagram here) Add caption explaining the schematic
 
 Build Photos
 ![Team](Add photo of your team here)
