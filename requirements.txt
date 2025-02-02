@@ -2,3 +2,7 @@ streamlit
 json
 folium
 streamlit_folium
+streamlit
+json
+folium
+streamlit_folium
