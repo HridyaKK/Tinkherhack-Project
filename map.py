@@ -7,15 +7,22 @@ from streamlit_folium import st_folium
 # Define the base map function for India with added effects
 def create_india_map(highlight_states=[], highlight_color='yellow', highlight_border_color='red'):
     # Coordinates for India (latitude and longitude)
-    india_location = [20.5937, 78.9629]  # Centered on India
-    # Create the base map centered on India with an initial zoom level
+    india_location = [20.5937, 78.9629]  
+    # Create the base map 
     folium_map = folium.Map(location=india_location, zoom_start=5)
-    # Add zoom control and the default tile layer (can be customized)
+    
     folium_map.add_child(folium.TileLayer("cartodb positron"))
    
-    with open(r"C:\\Users\\jiyaj\\OneDrive\\Desktop\\python s1\\Tinkherhack-Project\Indian_States.json") as f:
+    import os
+    import json
+
+
+    script_dir = os.path.dirname(__file__)  # Get the directory of the script
+    file_path = os.path.join(script_dir, 'Indian_States.json')
+
+    with open(file_path) as f:
         india_states = json.load(f)
-    
+
     # Define custom styling for the GeoJSON layer
     geojson_layer = folium.GeoJson(
         india_states,
@@ -24,7 +31,7 @@ def create_india_map(highlight_states=[], highlight_color='yellow', highlight_bo
             'color': highlight_border_color if feature['properties'].get('NAME_1') in highlight_states else 'black',
             'weight': 2,
             'dashArray': '5, 5' if feature['properties'].get('NAME_1') in highlight_states else '0',
-            'fillOpacity': 0.7,  # Adding opacity to the color fill
+            'fillOpacity': 0.7, 
         },
         tooltip=folium.GeoJsonTooltip(
             fields=['NAME_1'],
@@ -38,7 +45,6 @@ def create_india_map(highlight_states=[], highlight_color='yellow', highlight_bo
         }  # Add effects on hover 
     ).add_to(folium_map)
 
-    # Fit the map to the bounds of the GeoJSON layer
     folium_map.fit_bounds(geojson_layer.get_bounds())
     return folium_map
 
