@@ -45,12 +45,12 @@ To run the Python script: [python app.py]
 ###Project Documentation
 For Software:
 
-Screenshots (Add at least 3)
-![Screenshot1](crops) It is helps to visualize different crops grown in different states of India
+Screenshots 
+!crops.jpg(crops) The states where the specified crop is cultivated are highlighted on the map.
 
-![Screenshot2](soils) It is helps to visualize different soils in different states of India
+!Mountains.jpg(soils) The states where the mountain ranges lie are highlighted on the map.
 
-![Screenshot3](mountains) It is helps to visualize different types of mountains in different states of India
+!soil.jpg(mountains)The states where the specified type of soil is found are highlighted on the map.
 
 Diagrams
 ![Workflow](Add your workflow/architecture diagram here) Add caption explaining your workflow
@@ -58,18 +58,13 @@ Diagrams
 
 
 Build Photos
-![Team](Add photo of your team here)
-
-![Components](Add photo of your components here) List out all components shown
-
-![Build](Add photos of build process here) Explain the build steps
+!
 
 ![Final](Add photo of final product here) Explain the final build
 
 Project Demo
 Video
-[Add your demo video link here] Explain what the video demonstrates
 
-Additional Demos
-[Add any extra demo materials/links]
+
+
  
