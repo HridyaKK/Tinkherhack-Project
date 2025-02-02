@@ -1,13 +1,16 @@
+
 import json
 import folium
 import streamlit as st
 from streamlit_folium import st_folium
 
 # Define the base map function for India with added effects
-def create_india_map(highlight_states=[], highlight_color='yellow', highlight_border_color='red', zoom_level=5, opacity=0.7):
+def create_india_map(highlight_states=[], highlight_color='yellow', highlight_border_color='red'):
+    # Coordinates for India (latitude and longitude)
     india_location = [20.5937, 78.9629]  # Centered on India
-    folium_map = folium.Map(location=india_location, zoom_start=zoom_level, control_scale=True)
-    
+    # Create the base map centered on India with an initial zoom level
+    folium_map = folium.Map(location=india_location, zoom_start=5)
+    # Add zoom control and the default tile layer (can be customized)
     folium_map.add_child(folium.TileLayer("cartodb positron"))
    
     with open(r'C:\Users\HP\Desktop\Tinkherhack\Indian_States.json') as f:
@@ -21,7 +24,7 @@ def create_india_map(highlight_states=[], highlight_color='yellow', highlight_bo
             'color': highlight_border_color if feature['properties'].get('NAME_1') in highlight_states else 'black',
             'weight': 2,
             'dashArray': '5, 5' if feature['properties'].get('NAME_1') in highlight_states else '0',
-            'fillOpacity': opacity,  # Add opacity to the color fill
+            'fillOpacity': 0.7,  # Adding opacity to the color fill
         },
         tooltip=folium.GeoJsonTooltip(
             fields=['NAME_1'],
@@ -37,7 +40,6 @@ def create_india_map(highlight_states=[], highlight_color='yellow', highlight_bo
 
     # Fit the map to the bounds of the GeoJSON layer
     folium_map.fit_bounds(geojson_layer.get_bounds())
-    
     return folium_map
 
 # Add the main radio button for selecting options
@@ -50,4 +52,74 @@ highlight_color = 'yellow'
 highlight_border_color = 'red'
 
 if main_option == "Crops":
-    show_c
+    show_crops = True
+    with st.sidebar.expander("Crops Options"):
+        crop_option = st.radio("Select a crop", ["Rice", "Wheat", "Ragi", "Sugarcane", "Maize"])
+        if crop_option == "Ragi":
+            highlight_states = ["Karnataka", "Andhra Pradesh", "Tamil Nadu", "Maharashtra", "Uttarakhand"]
+            highlight_color = '#752b2b'
+            highlight_border_color = '#451a1a'
+        elif crop_option == "Rice":
+            highlight_states = ["Kerala", "West Bengal", "Uttar Pradesh", "Punjab", "Tamil Nadu"]
+            highlight_color = '#d6c3c3'
+            highlight_border_color = '#736b6b'
+        elif crop_option == "Wheat":
+            highlight_states = ["Punjab", "Uttar Pradesh", "Madhya Pradesh", "Rajasthan", "Uttarakhand"]
+            highlight_color = '#ba9e2f'
+            highlight_border_color = '#d6660b'
+        elif crop_option == "Sugarcane":
+            highlight_states = ["Maharashtra", "Uttar Pradesh", "Karnataka", "Andhra Pradesh"]
+            highlight_color = 'lightgreen'
+            highlight_border_color = 'darkgreen'
+        elif crop_option == "Maize":
+            highlight_states = ["Madhya Pradesh", "Rajasthan", "Karnataka"]
+            highlight_color = 'lightblue'
+            highlight_border_color = 'darkblue'
+
+elif main_option == "Mountains":
+    show_mountains = True
+    with st.sidebar.expander("Mountain Options"):
+        mountain_option = st.radio("Select a mountain range", ["Himalayas", "Western Ghats", "Eastern Ghats"])
+        if mountain_option == "Himalayas":
+            highlight_states = ["Jammu and Kashmir", "Himachal Pradesh", "Uttarakhand", "Sikkim", "Arunachal Pradesh"]
+            highlight_color = 'lightblue'
+            highlight_border_color = 'blue'
+        elif mountain_option == "Western Ghats":
+            highlight_states = ["Maharashtra", "Goa", "Karnataka", "Kerala", "Tamil Nadu"]
+            highlight_color = 'lightgreen'
+            highlight_border_color = 'green'
+        elif mountain_option == "Eastern Ghats":
+            highlight_states = ["Odisha", "Andhra Pradesh", "Tamil Nadu"]
+            highlight_color = 'orange'
+            highlight_border_color = 'darkorange'
+
+elif main_option == "Soil":
+    show_soil = True
+    with st.sidebar.expander("Soil Options"):
+        soil_option = st.radio("Select a soil type", ["Alluvial", "Red Soil", "Arid", "Clayey", "Peaty"])
+        if soil_option == "Alluvial":
+            highlight_states = ["Punjab", "Haryana", "Uttar Pradesh", "Bihar", "West Bengal"]
+            highlight_color = 'lightyellow'
+            highlight_border_color = 'gold'
+        elif soil_option == "Red Soil":
+            highlight_states = ["Chhattisgarh", "Orissa"]
+            highlight_color = 'red'
+            highlight_border_color = 'darkred'
+        elif soil_option == "Arid":
+            highlight_states = ["Gujarat", "Haryana"]
+            highlight_color = '#c2ac9b'
+            highlight_border_color = 'brown'
+        elif soil_option == "Clayey":
+            highlight_states = ["Chhattisgarh", "Malwa"]
+            highlight_color = 'darkgrey'
+            highlight_border_color = 'grey'
+        elif soil_option == "Peaty":
+            highlight_states = ["Kerala", "West Bengal"]
+            highlight_color = 'darkgreen'
+            highlight_border_color = 'green'
+
+# Create the map for India with the selected options
+map = create_india_map(highlight_states=highlight_states, highlight_color=highlight_color, highlight_border_color=highlight_border_color)
+
+# Render the map in Streamlit
+st_folium(map, width=725)
