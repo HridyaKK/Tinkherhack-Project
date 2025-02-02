@@ -13,17 +13,16 @@ def create_india_map(highlight_states=[], highlight_color='yellow', highlight_bo
     
     folium_map.add_child(folium.TileLayer("cartodb positron"))
    
-import os
-import json
+    import os
+    import json
 
 
-script_dir = os.path.dirname(__file__)  # Get the directory of the script
-file_path = os.path.join(script_dir, 'Indian_States.json')
+    script_dir = os.path.dirname(__file__)  # Get the directory of the script
+    file_path = os.path.join(script_dir, 'Indian_States.json')
 
-with open(file_path) as f:
-    india_states = json.load(f)
+    with open(file_path) as f:
+        india_states = json.load(f)
 
-    
     # Define custom styling for the GeoJSON layer
     geojson_layer = folium.GeoJson(
         india_states,
@@ -46,7 +45,6 @@ with open(file_path) as f:
         }  # Add effects on hover 
     ).add_to(folium_map)
 
-   
     folium_map.fit_bounds(geojson_layer.get_bounds())
     return folium_map
 
