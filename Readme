@@ -24,7 +24,7 @@ For Software:
 [Languages : python]
 [Frameworks : folium,streamlit]
 [Libraries : folium,streamlit,csv,geopandas]
-[Tools : Python, Folium, Streamlit, GitHub]
+[Tools : Python, Folium, Streamlit, VS Code GitHub]
 For Hardware:
 
 [List main components]
