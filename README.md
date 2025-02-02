@@ -1,12 +1,12 @@
 # Geonify🎯
 
-#Basic Details
+Basic Details
 Team Name: TechRift
 Team Members
 Member 1: Arshiya Sulfikkar - Muthoot Institute of Technology and Science
 Member 2: Hridya K K - Muthoot Institute of Technology and Science
 Member 3: Jiya Joe Palathinkal - Muthoot Institute of Technology and Science
-#Hosted Project Link
+Hosted Project Link
 http://localhost:8503/
 
 Project Description
