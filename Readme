@@ -6,7 +6,7 @@ Member 1: Arshiya Sulfikkar - Muthoot Institute of Technology and Science
 Member 2: Hridya K K - Muthoot Institute of Technology and Science
 Member 3: Jiya Joe Palathinkal - Muthoot Institute of Technology and Science
 Hosted Project Link
-[mention your project hosted project link here
+http://localhost:8503/
 
 Project Description
 This project helps school students explore an interactive map of India, showcasing various types of soils, crops, and mountains. By using Folium and Streamlit, the map allows students to learn about different agricultural regions, soil types, and mountain locations with interactive features, enabling them to select and view relevant information easily.
