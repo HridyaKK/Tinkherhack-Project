@@ -13,7 +13,7 @@ def create_india_map(highlight_states=[], highlight_color='yellow', highlight_bo
     # Add zoom control and the default tile layer (can be customized)
     folium_map.add_child(folium.TileLayer("cartodb positron"))
    
-    with open(r"C:\\Users\\jiyaj\\OneDrive\\Desktop\\python s1\\Tinkherhack-Project\\Indian_States.json") as f:
+    with open(r"C:\\Users\\jiyaj\\OneDrive\\Desktop\\python s1\\Tinkherhack-Project\Indian_States.json") as f:
         india_states = json.load(f)
     
     # Define custom styling for the GeoJSON layer
