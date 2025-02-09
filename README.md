@@ -44,11 +44,16 @@ For Software:
 ### Implementation
 For Software:
 # Installation
-`pip install streamlit`
-`pip install folium`
-`pip install streamlit-folium`
-`python -m venv venv`
-`venv\Scripts\activate`
+`pip install streamlit`  
+
+`pip install folium`  
+
+`pip install streamlit-folium`  
+
+`python -m venv venv`  
+
+`venv\Scripts\activate`  
+
 
 # Run
 `streamlit run main.py`
