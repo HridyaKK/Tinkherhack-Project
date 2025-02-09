@@ -1,6 +1,7 @@
 # Geonify🎯
 
-##Basic Details
+
+
 ###Team Name: TechRift
 ###Team Members
 Team Lead: Hridya K K - Muthoot Institute of Technology and Science
