@@ -29,7 +29,7 @@ def highlight_function(feature):
     }
 
 # Define the base map function for India with added effects
-@st.cache_data  # Cache the function to avoid re-calculating on each interaction
+@st.cache_data  # Cache only the data processing part, not the entire map
 def create_india_map(geojson_data, highlight_states=[], highlight_color='yellow', highlight_border_color='red'):
     # Coordinates for India (latitude and longitude)
     india_location = [20.5937, 78.9629]  
