@@ -11,8 +11,25 @@ file_path = os.path.join(script_dir, 'Indian_States.json')
 with open(file_path) as f:
     india_states = json.load(f)
 
+# Define the styling function for the GeoJSON layer (refactor lambda to a regular function)
+def style_function(feature, highlight_states, highlight_color, highlight_border_color):
+    return {
+        'fillColor': highlight_color if feature['properties'].get('NAME_1') in highlight_states else 'transparent',
+        'color': highlight_border_color if feature['properties'].get('NAME_1') in highlight_states else 'black',
+        'weight': 2,
+        'dashArray': '5, 5' if feature['properties'].get('NAME_1') in highlight_states else '0',
+        'fillOpacity': 0.7, 
+    }
+
+def highlight_function(feature):
+    return {
+        'weight': 3,
+        'color': 'blue',
+        'fillOpacity': 0.9
+    }
+
 # Define the base map function for India with added effects
-@st.cache  # Cache the function to avoid re-calculating on each interaction
+@st.cache_data  # Cache the function to avoid re-calculating on each interaction
 def create_india_map(geojson_data, highlight_states=[], highlight_color='yellow', highlight_border_color='red'):
     # Coordinates for India (latitude and longitude)
     india_location = [20.5937, 78.9629]  
@@ -24,23 +41,13 @@ def create_india_map(geojson_data, highlight_states=[], highlight_color='yellow'
     # Define custom styling for the GeoJSON layer
     geojson_layer = folium.GeoJson(
         geojson_data,
-        style_function=lambda feature: {
-            'fillColor': highlight_color if feature['properties'].get('NAME_1') in highlight_states else 'transparent',
-            'color': highlight_border_color if feature['properties'].get('NAME_1') in highlight_states else 'black',
-            'weight': 2,
-            'dashArray': '5, 5' if feature['properties'].get('NAME_1') in highlight_states else '0',
-            'fillOpacity': 0.7, 
-        },
+        style_function=lambda feature: style_function(feature, highlight_states, highlight_color, highlight_border_color),
         tooltip=folium.GeoJsonTooltip(
             fields=['NAME_1'],
             aliases=['State:'],
             style=("background-color: black; color: white; font-style: italic;")
         ),
-        highlight_function=lambda feature: {
-            'weight': 3,
-            'color': 'blue',
-            'fillOpacity': 0.9
-        }  # Add effects on hover 
+        highlight_function=highlight_function  # Use the refactored highlight function
     ).add_to(folium_map)
 
     folium_map.fit_bounds(geojson_layer.get_bounds())
