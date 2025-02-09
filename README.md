@@ -80,5 +80,5 @@ For Software:
 
 ### Project Demo
 # Video
-[Add your demo video link here]
-*Explain what the video demonstrates*
+[Geonify.mp4]
+*This video illustrates the flow of operations in the interactive India map application. It outlines how users interact with the app, from selecting an option in the sidebar to visualizing the highlighted regions on the map based on the chosen feature (Crops, Mountains, or Soil).*
