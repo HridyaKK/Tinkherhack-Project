@@ -1,6 +1,6 @@
 # Geonify🎯
 
-##Basic Details
+
 
 ###Team Name: TechRift
 ###Team Members
