@@ -1,11 +1,19 @@
-
 import json
 import folium
 import streamlit as st
 from streamlit_folium import st_folium
+import os
+
+# Load the GeoJSON file once at the start
+script_dir = os.path.dirname(__file__)  # Get the directory of the script
+file_path = os.path.join(script_dir, 'Indian_States.json')
+
+with open(file_path) as f:
+    india_states = json.load(f)
 
 # Define the base map function for India with added effects
-def create_india_map(highlight_states=[], highlight_color='yellow', highlight_border_color='red'):
+@st.cache  # Cache the function to avoid re-calculating on each interaction
+def create_india_map(geojson_data, highlight_states=[], highlight_color='yellow', highlight_border_color='red'):
     # Coordinates for India (latitude and longitude)
     india_location = [20.5937, 78.9629]  
     # Create the base map 
@@ -13,19 +21,9 @@ def create_india_map(highlight_states=[], highlight_color='yellow', highlight_bo
     
     folium_map.add_child(folium.TileLayer("cartodb positron"))
    
-    import os
-    
-
-
-    script_dir = os.path.dirname(__file__)  # Get the directory of the script
-    file_path = os.path.join(script_dir, 'Indian_States.json')
-
-    with open(file_path) as f:
-        india_states = json.load(f)
-
     # Define custom styling for the GeoJSON layer
     geojson_layer = folium.GeoJson(
-        india_states,
+        geojson_data,
         style_function=lambda feature: {
             'fillColor': highlight_color if feature['properties'].get('NAME_1') in highlight_states else 'transparent',
             'color': highlight_border_color if feature['properties'].get('NAME_1') in highlight_states else 'black',
@@ -58,7 +56,6 @@ highlight_color = 'yellow'
 highlight_border_color = 'red'
 
 if main_option == "Crops":
-    show_crops = True
     with st.sidebar.expander("Crops Options"):
         crop_option = st.radio("Select a crop", ["Rice", "Wheat", "Ragi", "Sugarcane", "Maize"])
         if crop_option == "Ragi":
@@ -83,7 +80,6 @@ if main_option == "Crops":
             highlight_border_color = 'darkblue'
 
 elif main_option == "Mountains":
-    show_mountains = True
     with st.sidebar.expander("Mountain Options"):
         mountain_option = st.radio("Select a mountain range", ["Himalayas", "Western Ghats", "Eastern Ghats"])
         if mountain_option == "Himalayas":
@@ -100,7 +96,6 @@ elif main_option == "Mountains":
             highlight_border_color = 'darkorange'
 
 elif main_option == "Soil":
-    show_soil = True
     with st.sidebar.expander("Soil Options"):
         soil_option = st.radio("Select a soil type", ["Alluvial", "Red Soil", "Arid", "Clayey", "Peaty"])
         if soil_option == "Alluvial":
@@ -125,7 +120,7 @@ elif main_option == "Soil":
             highlight_border_color = 'green'
 
 # Create the map for India with the selected options
-map = create_india_map(highlight_states=highlight_states, highlight_color=highlight_color, highlight_border_color=highlight_border_color)
+map = create_india_map(geojson_data=india_states, highlight_states=highlight_states, highlight_color=highlight_color, highlight_border_color=highlight_border_color)
 
 # Render the map in Streamlit
 st_folium(map, width=725)
