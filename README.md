@@ -1,66 +1,84 @@
-# Geonify🎯
+# Geoinfy 🎯
 
 
+## Basic Details
+### Team Name: Techrift
 
-###Team Name: TechRift
-###Team Members
-Team Lead: Hridya K K - Muthoot Institute of Technology and Science
--Member 2: Arshiya Sulfikkar - Muthoot Institute of Technology and Science
--Member 3: Jiya Joe Palathinkal - Muthoot Institute of Technology and Science
-Hosted Project Link
-http://localhost:8503/
 
-###Project Description
+### Team Members
+- Member 1: Arshiya Sulfikkar - Muthoot Institute of Technology and Science, Kochi
+- Member 2: Hridya K K - Muthoot Institute of Technology and Science, Kochi
+- Member 3: Jiya Joe Palathinkal - Muthoot Institute of Technology and Science, Kochi
+
+### Hosted Project Link
+https://geonify.streamlit.app/
+
+### Project Description
 This project helps school students explore an interactive map of India, showcasing various types of soils, crops, and mountains. By using Folium and Streamlit, the map allows students to learn about different agricultural regions, soil types, and mountain locations with interactive features, enabling them to select and view relevant information easily.
 
-###The Problem statement
+
+### The Problem statement
 School students often struggle to access accurate and easily understandable information regarding the geographical distribution of soil types, crops, and mountains across India. Searching for this data across multiple websites can be time-consuming and inefficient.
 
-###The Solution
+### The Solution
 This project provides an interactive map of India, enabling students to explore various soil types, crops, and mountains through an intuitive platform. By using Folium and Streamlit, the map allows students to visually interact with and learn about the geographical and agricultural features, enhancing their understanding in a user-friendly and engaging manner.
 
-##Technical Details
-###Technologies/Components Used
+
+## Technical Details
+### Technologies/Components Used
+For Software:
+- Languages : Python
+- Frameworks : Streamlit
+- Libraries
+  - json (for JSON file handling)
+  - os (for file/directory operations)
+  - functools (for the lru_cache decorator)
+  - folium (for creating interactive maps)
+  - streamlit_folium (Streamlit component for Folium maps integration)
+- Tools
+  - VS Code (Code editor)
+  - GitHub (Version control and repository hosting)
+  - Git Bash (Command line interface for Git)
+  - pip (Python package installer)
+
+### Implementation
+For Software:
+# Installation
+pip install streamlit
+pip install folium
+pip install streamlit-folium
+python -m venv venv
+venv\Scripts\activate
+
+# Run
+streamlit run main.py
+
+### Project Documentation
 For Software:
 
--Languages : python
--Frameworks : folium,streamlit
--Libraries : folium,streamlit,csv,geopandas
--Tools : Python, Folium, Streamlit, VS Code, GitHub
+# Screenshots
+![crops.jpg] 
+*The states where the specified crop is cultivated are highlighted on the map.*
 
+![Mountains.jpg]
+*The states where the mountain ranges lie are highlighted on the map.*
 
-###Implementation
-For Software:
+![soil.jpg]
+*The states where the specified type of soil is found are highlighted on the map.*
 
-#Installation
+# User Flow
+   1. The user starts the app by running the Streamlit command:  
+      `streamlit run main.py`
+   2. The app opens with the map centered on India.
+   3. The user selects **Crops**, **Mountains**, or **Soil** from the sidebar.
+   4. Based on the selection, the user chooses a specific crop, mountain range, or soil type.
+   5. The map updates to highlight the relevant states with the chosen feature's colors.
+   6. Users can interactively switch between categories and explore the map.
 
-To install Folium: [pip install folium]
-To install Streamlit: [pip install streamlotit]
-To install GeoPandas: [pip install geopandas]
+# Build Photos
+![AHJ.jpg]
 
-#Run
-To run the Streamlit app:: [streamlit run app.py]
-To run the Python script: [python app.py]
-
-
-###Project Documentation
-For Software:
-
-Screenshots 
-!crops.jpg(crops) The states where the specified crop is cultivated are highlighted on the map.
-
-!Mountains.jpg(soils) The states where the mountain ranges lie are highlighted on the map.
-
-!soil.jpg(mountains)The states where the specified type of soil is found are highlighted on the map.
-
-
-
-
-Build Photos
-!AHJ.jpg
-
-!Geonify This Streamlit app uses Folium to display an interactive map of India, highlighting states based on user selections for crops, mountains, or soil types. Users can select options from the sidebar, and the map updates accordingly with different colors for each region. The app requires Indian_States.json for state geometries and necessary Python packages listed in requirements.txt.
-
-
-
- 
+### Project Demo
+# Video
+[Add your demo video link here]
+*Explain what the video demonstrates*
