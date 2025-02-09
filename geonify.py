@@ -1,4 +1,11 @@
-# Fit the map to the bounds of the GeoJSON layer
+import folium
+import streamlit as st
+
+def create_folium_map():
+    # Create a folium map
+    folium_map = folium.Map(location=[20, 0], zoom_start=2)
+
+    # Fit the map to the bounds of the GeoJSON layer
     folium_map.fit_bounds(geojson_layer.get_bounds())
     return folium_map
 
